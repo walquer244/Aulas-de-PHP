@@ -7,26 +7,25 @@
 </head>
 <body>
     <h2>Digite seu nome </h2>
-    <form method="post" action="tabela.php">
+    <form method="post" action="">
         <label for="nome" id="nome">Digite seu nome</label><br>
         <input type="text" name="nome" required><br>
         <input type="submit" value="enviar">
     </form>
 <?php
-include "conexao.php";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "aula_crud";
 
-// $servername = "localhost";
-// $username = "root";
-// $password = "";
-// $dbname = "aula_crud";
-
-// $conexao = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+$conexao = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
     $nome = $_POST["nome"];
 }
-$query = $conexao -> prepare("INSERT INTO categorias(nome) VALUE(:nome)");
+$query = $conexao -> prepare("INSERT INTO categorias(nome) VALUE(':nome')");
 $query -> bindValue(":nome","$nome");
 $query -> execute(); 
+
 ?>
 </body>
 </html>
